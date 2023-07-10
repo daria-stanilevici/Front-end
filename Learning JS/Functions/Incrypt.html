@@ -1,0 +1,50 @@
+<!-- 1. Some company, when transmitting data via a phone, is concerned that phones may be tapped. All data is transmitted as four-digit integers. Write a program in JavaScript that encrypts this data. The script reads a four-digit number in the prompt window and encrypts it as follows: each digit is replaced by (the sum of the digit with the number 7 modulo 10. Then the first digit changes from the third, and the second from the fourth. Output the received code -->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Incrypt</title>
+   </head>
+   <body>
+      <script type="text/javascript">
+         function incrypt(num) {
+         
+         var inc1 = ('' + num)[0];
+         inc1 = Number(inc1);
+         inc1 = (inc1 + 7) % 10;
+         inc1 = Math.round(inc1);
+         
+         var inc2 = ('' + num)[1];
+         inc2 = Number(inc2);
+         inc2 = (inc2 + 7) % 10;
+         inc2 = Math.round(inc2);
+         
+         var inc3 = ('' + num)[2];
+         inc3 = Number(inc3);
+         inc3 = (inc3 + 7) % 10;
+         inc3 = Math.round(inc3);
+         
+         var inc4 = ('' + num)[3];
+         inc4 = Number(inc4);
+         inc4 = (inc4 + 7) % 10;
+         inc4 = Math.round(inc4);
+         
+         var temp;
+         temp = inc1;
+         inc1 = inc3;
+         inc3 = inc1;
+         
+         temp = inc2;
+         inc2 = inc4;
+         inc4 = temp;
+         
+         inc1 = String(inc1);
+         inc2 = String(inc2);
+         inc3 = String(inc3);
+         inc4 = String(inc4);
+         
+         alert(inc1 + inc2 + inc3 + inc4);
+         }
+         incrypt(9469);
+      </script>
+   </body>

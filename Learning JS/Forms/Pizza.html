@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Pizza Delivery</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Candara;
+        color: #EEEEEE;
+        background-color: black;
+    }
+    main {
+        height: 100vh;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .order {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 20px 0;
+    }
+    .delivery {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+    }
+    .pizza {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 200px 500px 1fr 1fr 1fr;
+        justify-content: center;
+        align-content: center;
+        height: max-content;
+        padding: 20px 0;
+    }
+    .pizza img {
+        justify-self: center;
+        align-self: center;
+        width: 280px;
+    }
+    .info,
+    .product,
+    .price,
+    .total {
+        display: grid;
+    }
+    .product .header,
+    .price .header,
+    .total .header {
+        justify-self: center;
+    }
+    .product .data,
+    .price .data,
+    .total .data {
+        font-size: 1.2rem;
+        justify-self: center;
+    }
+    .info .title {
+        font-weight: bold;
+        font-size: 1.05rem;
+        margin: 0 0 10px 10px;
+        justify-self: start;
+    }
+    .description {
+        width: 300px;
+        font-size: 0.9rem;
+        margin: 10px 0 10px 10px;
+    }
+    #product {
+        font-size: 1.2rem;
+    }
+    button {
+        width: 30px;
+        height: 30px;
+        border: 1px solid white;
+        background-color: transparent;
+        color: white;
+        border-radius: 5px;
+    }
+    .total {
+        margin: 20px 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .price-total {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        font-size: 1.2rem;
+    }
+    .title-total {
+        font-weight: bold;
+    }
+    hr {
+        width: 100%;
+    }
+</style>
+<body>
+<main>
+    <div class="order">Order type:</div>
+    <div class="delivery">
+        <label for="delivery">
+            <input type="radio" name="delivery" data-value="4" id="delivery"/>Delivery
+        </label>
+        <label for="in">
+            <input type="radio" name="delivery" data-value="0" id="in" checked/>In restaurant
+        </label>
+    </div>
+    <div class="pizza">
+        <img src="pizza.png" alt="pizza"/>
+        <div class="info">
+            <div class="title">BBQ AMERICANO PIZZA</div>
+            <div class="description">Smoky BBQ sauce, chicken breast, bacon & sweetcorn with a BBQ drizzle.</div>
+        </div>
+        <div class="product">
+            <span class="header">product</span>
+            <div class="data" id="product">
+                <button id="minus"> - </button>
+                <span id="count">1</span>
+                <button id="plus"> + </button>
+            </div>
+        </div>
+        <div class="price">
+            <span class="header">Price</span>
+            <span class="data" id="price">12 £</span>
+        </div>
+        <div class="total">
+            <span class="header">Total</span>
+            <div class="data" id="price-total">12 £</div>
+        </div>
+    </div>
+    <hr>
+    <div class="total">
+        <div class="price-total">
+            <span>Subtotal:</span>
+            <div id="subtotal">12 £</div>
+            <span>Delivery:</span>
+            <div id="delivery-price">0 £</div>
+            <span class="title-total">Total:</span>
+            <div class="title-total" data-value="12" id="total">12 £</div>
+        </div>
+    </div>
+</main>
+<script>
+    const increaseButton = document.getElementById("plus");
+    const decreaseButton = document.getElementById("minus");
+    const totalPrice = document.getElementById("total");
+    const delivery = document.getElementById("delivery-price");
+    const subtotal = document.getElementById("subtotal");
+    const totalpizzaPrice = document.getElementById("price-total");
+    const radios = document.querySelector(".delivery");
+    radios.addEventListener("change", function (e) {
+        if (e.target.tagName === "input" && e.target.type === "radio") {
+            countSum();
+        }
+    });
+    const countSum = () => {
+        const array = [
+            totalPrice,
+            ...document.querySelectorAll('input[type="radio"]:checked'),
+        ];
+
+        const sum = array.reduce((acc, n) => acc + +n.dataset.value, 0);
+        delivery.textContent = `${array[1].dataset.value} £`;
+        totalPrice.textContent = `${sum} £`;
+    };
+    decreaseButton.addEventListener("click", () => {
+        const product = document.getElementById("count");
+        if (product.textContent > 1) {
+            totalpizzaPrice.textContent = `${
+                parseInt(totalpizzaPrice.textContent) - 12
+            } £`;
+            subtotal.textContent = `${parseInt(subtotal.textContent) - 12} £`;
+            totalPrice.dataset.value = parseInt(totalPrice.textContent) - 12;
+            totalPrice.textContent = `${parseInt(totalPrice.textContent) - 12} £`;
+            product.textContent = parseInt(product.textContent) - 1;
+        } else {
+            product.textContent = 1;
+        }
+    });
+    increaseButton.addEventListener("click", () => {
+        const product = document.getElementById("count");
+        totalpizzaPrice.textContent = `${
+            parseInt(totalpizzaPrice.textContent) + 12
+        } £`;
+        subtotal.textContent = `${parseInt(subtotal.textContent) + 12} £`;
+        totalPrice.dataset.value = parseInt(totalPrice.textContent) + 12;
+        totalPrice.textContent = `${parseInt(totalPrice.textContent) + 12} £`;
+        product.textContent = parseInt(product.textContent) + 1;
+    });
+</script>
+</body>
+</html>

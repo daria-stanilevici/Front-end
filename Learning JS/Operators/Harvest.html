@@ -1,0 +1,28 @@
+<!-- 3. The apple harvest in 1990 was 20 tons. Then, every two years, the harvest decreased by 20%.
+   a) Starting from what year will less than 5 tons be harvested?
+   b) In what year will the total apple harvest exceed 90 tons? -->
+   
+<!DOCTYPE html>
+<html lang="ru">
+   <head>
+      <title>Products</title>
+   </head>
+   <body>
+      <script>
+         var year = 1990;
+         var harvest = 20; //tones
+         var percent = 0.2; //20%
+         var sum = 20;
+         
+         while(sum <= 90) { 
+         if(harvest >= 5) document.write('In ' + year + ' there are ' + harvest + ' tons  of crop<br>')
+         year += 2;
+         harvest = harvest - (harvest * percent);
+         sum += harvest;
+         
+         if(harvest <= 5 && harvest > 4) document.write('<br>Starting from the ' + year + ' year less than 5 tons of crop will be harvested!<br>');
+         if(sum > 90) document.write('In ' + year + ' year the total apple harvest will exceed 90 tons');
+         }
+      </script>
+   </body>
+</html>

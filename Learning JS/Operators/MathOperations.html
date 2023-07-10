@@ -1,0 +1,37 @@
+<!-- 3. Create a script that receives 3 numbers from the user and outputs their sum, product, average, minimum and maximum -->
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <title>Math Operations</title>   
+</head>
+   <body>
+      <script>
+         let first = +prompt('The first number:');
+         let second = +prompt('The second number:');
+         let third = +prompt('The third number:');
+
+         let sum;
+         sum = first + second + third;
+         alert('Sum: ' + sum);
+         
+         let mult = first * second * third;
+         alert('Multiplication: ' + mult);
+         
+         let max = first;
+         if(second > max) max = second;
+         if(third > max) max = third;
+         rez = max;
+         alert('Maximum: ' + rez);
+         
+         let min = first;
+         if(second < min) min = second;
+         if(third < min) min = third;
+         rez = min;
+         alert('Minimum: ' + rez);
+         
+         let avr = ((first + second + third)/3);
+         alert('Average: ' + avr); 
+      </script>
+   </body>
+</html>

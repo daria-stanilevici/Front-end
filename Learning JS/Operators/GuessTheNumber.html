@@ -1,0 +1,50 @@
+<!-- 5. The game "Guess the number". Guess an integer that the computer has" guessed " in a certain range. Display the messages "Less" or "More" each time, depending on the number entered by the user, and the message "Congratulations!" if the user guessed correctly. The game ends when the user has guessed or given up -->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Guess the number</title>
+      <style>
+         html {
+         font-family: Candara;
+         }
+         
+         body {
+         width: 50%;
+         max-width: 800px;
+         min-width: 480px;
+         margin: 0 auto;
+         }
+      </style>
+   </head>
+   <body>
+      <h1>Guess the number</h1>
+      <p>Have you decided to fight me? Try! I made a number, how <br>many  attempts will it take you to guess it?</p>
+      
+      <div class="form">
+         <label for="guessField">Enter a guess: </label>
+         <input type = "text" id = "guessField" class = "guessField">
+         <input type = "submit" value = "Submit guess" class = "guessSubmit" id = "submitguess">
+      </div>
+     
+      <script type = "text/javascript">
+         var number = Math.floor(Math.random() * 10 + 1);
+         var guess = 1;
+
+         document.getElementById("submitguess").onclick = function() {
+         var a = document.getElementById("guessField").value;
+         if(a == number) {    
+            alert("You guessed it in the " + guess + " time!");
+         }
+         else if(a > number) {    
+            guess++;
+            alert("No!!! Try smth smaller...");
+         }
+         else {
+            guess++;
+            alert("No!!! Try smth greater...")
+         }
+         }
+      </script>
+   </body>
+</html>

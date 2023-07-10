@@ -1,0 +1,57 @@
+<!-- 1. The sales agent sells five different products, the prices of which are as follows: 
+   product1 - $2.98; 
+   product2 - $4.50; 
+   product3 - $9.98; 
+   product4 - $4.49; 
+   product5 - $6.87. 
+   
+   Create a script that reads a pair of numbers :
+   a) Product number (from 1 to 5)
+   b) Quantity sold
+   
+   The program must use the switch operator, which will determine and display the price of each product on the HTML page, as well as calculate the total cost of the products sold. Use the prompt function to enter values. The input of values must be completed by entering the value 0 for the product number -->
+
+<!DOCTYPE html>
+<html lang="ru">
+   <body>
+      <title>Products</title>
+      <script>
+         let p1 = 2.98; let p2 = 4.50; let p3 = 9.98; let p4 = 4.49; let p5 = 6.87;
+         let product; let sales;
+         do {
+         product = prompt("Product number", 1)
+         
+            switch(product) {
+               case "1": 
+               sales = prompt("Number of sales: ", 1);
+               alert('Product price: ' + p1 + '$  Cost: ' + (p1 * sales) + '$');
+               break;
+               
+               case "2":
+               sales = prompt("Number of sales: ", 1);
+               alert('Product price: ' + p2 + '$  Cost: ' + (p2 * sales) + '$');
+               break;
+         
+               case "3":
+               sales = prompt("Number of sales: ", 1);
+               alert('Product price: ' + p3 + '$  Cost: ' + (p3 * sales) + '$');
+               break;
+         
+               case "4":
+               sales = prompt("Number of sales: ", 1);
+               alert('Product price: ' + p4 + '$  Cost: ' + (p4 * sales) + '$');
+               break;
+         
+               case "5":
+               sales = prompt("Number of sales: ", 1);
+               alert('Product price: ' + p5 + '$  Cost: '+ (p5 * sales) + '$');
+               break;
+         
+               default:
+               alert("There are no such values");
+            }
+
+         } while(product != 0);
+      </script>
+   </body>
+</html>

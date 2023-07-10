@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shop</title>
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  main {
+    font-family: Candara, sans-serif;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+  }
+  main .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 0 50px 0;
+  }
+  hr {
+    width: 53%;
+    margin: 30px;
+  }
+  .products {
+    display: flex;
+    gap: 30px;
+  }
+  .card {
+    border: 2px solid grey;
+    padding: 20px;
+    width: max-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .product {
+    color: #27496D;
+    font-weight: bold;
+    font-size: 1.3rem;
+    width: 200px;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+  .image {
+    width: 200px;
+    height: 200px;
+  }
+  .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .shop-cart {
+    background: wheat;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    height: max-content;
+  }
+  .cart-title {
+    font-style: italic;
+    font-size: 1.4rem;
+    margin: 10px 0;
+  }
+  .price {
+    display: flex;
+  }
+  .text {
+    display: flex;
+  }
+  button,
+  input {
+    font-family: Inter, sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 10px;
+    color: grey;
+    padding: 8px 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+  }
+  input {
+    max-width: 115px;
+  }
+  .bottom {
+    display: flex;
+    align-items: center;
+  }
+  .favorite img {
+    width: 50px;
+  }
+</style>
+<body>
+<main>
+  <div class="title">Shop</div>
+  <hr>
+  <div class="data">
+    <div class="products">
+      <div class="card">
+        <div class="product">La Roche-Posay Physiological Soothing Lotion</div>
+        <div class="image"><img src="lotion.jpg" alt="La Roche-Posay Physiological Soothing Lotion"/></div>
+        <div class="price">$
+          <div id="lotion-price">29.99</div>
+        </div>
+        <count>
+          <span class="quantity">How many?</span>
+          <input id="lotion-count" type="number" min="1" value="1" />
+        </count>
+        <div class="bottom">
+          <button onclick="addLotion()">Add to Basket</button>
+          <div class="favorite"><img src="star.png" alt="Favourite" /></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="product">La Roche-Posay Effaclar Gel Moussant Purifiant</div>
+        <div class="image"><img src="gel.png" alt="La Roche-Posay Effaclar Gel Moussant Purifiant"/></div>
+        <div class="price">$
+          <div id="price-gel">17.34</div>
+        </div>
+        <count>
+          <span class="quantity">How many?</span>
+          <input id="gel-count" type="number" min="1" value="1" />
+        </count>
+        <div class="bottom">
+          <button onclick="addGel()">Add to Basket</button>
+          <div class="favorite"><img src="star.png" alt="Favourite" /></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="product">La Roche-Posay Effaclar Duo +</div>
+        <div class="image"><img src="effaclar.jpg" alt="La Roche-Posay Effaclar Duo +"/></div>
+        <div class="price">$
+          <div id="price-effaclar">10.87</div>
+        </div>
+        <count>
+          <span class="quantity">How many?</span>
+          <input id="effaclar-count" type="number" min="1" value="1" />
+        </count>
+        <div class="bottom">
+          <button onclick="addEffaclar()">Add to Basket</button>
+          <div class="favorite"><img src="starr.png" alt="Favourite" /></div>
+        </div>
+      </div>
+      <div class="shop-cart">
+        <div class="cart-title">Shopping Cart</div>
+        <div class="text">
+          <span>Total items:</span>
+          <span data-lotion="false" data-gel="false" data-effaclar="false" id="total-items" class="total-items">0</span>
+        </div>
+        <div class="text">
+          <span>Total units:</span>
+          <span id="total-units" class="total-units">0</span>
+        </div>
+        <div class="text">
+          <span>Total:</span>
+          <div class="price">
+            $<span id="total" class="total">0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+<script>
+  const addLotion = () => {
+    const product = document.getElementById("lotion-count");
+    const price = document.getElementById("lotion-price");
+    const totalItems = document.getElementById("total-items");
+    const totalUnits = document.getElementById("total-units");
+    const total = document.getElementById("total");
+    if (totalItems.dataset.lotion === "false") {
+      totalItems.dataset.lotion = "true";
+      totalItems.textContent = parseInt(totalItems.textContent) + 1;
+    }
+    totalUnits.textContent =
+            parseInt(totalUnits.textContent) + parseInt(product.value);
+    total.textContent = (
+            parseFloat(total.textContent) +
+            parseInt(product.value) * parseFloat(price.textContent)
+    ).toFixed(2);
+  };
+  const addGel = () => {
+    const product = document.getElementById("gel-count");
+    const price = document.getElementById("price-gel");
+    const totalItems = document.getElementById("total-items");
+    const totalUnits = document.getElementById("total-units");
+    const total = document.getElementById("total");
+
+    if (totalItems.dataset.gel === "false") {
+      totalItems.dataset.gel = "true";
+      totalItems.textContent = parseInt(totalItems.textContent) + 1;
+    }
+    totalUnits.textContent =
+            parseInt(totalUnits.textContent) + parseInt(product.value);
+    total.textContent = (
+            parseFloat(total.textContent) +
+            parseInt(product.value) * parseFloat(price.textContent)
+    ).toFixed(2);
+  };
+  const addEffaclar = () => {
+    const product = document.getElementById("effaclar-count");
+    const price = document.getElementById("price-effaclar");
+    const totalItems = document.getElementById("total-items");
+    const totalUnits = document.getElementById("total-units");
+    const total = document.getElementById("total");
+
+    if (totalItems.dataset.effaclar === "false") {
+      totalItems.dataset.effaclar = "true";
+      totalItems.textContent = parseInt(totalItems.textContent) + 1;
+    }
+    totalUnits.textContent =
+            parseInt(totalUnits.textContent) + parseInt(product.value);
+    total.textContent = (
+            parseFloat(total.textContent) +
+            parseInt(product.value) * parseFloat(price.textContent)
+    ).toFixed(2);
+  };
+</script>
+</html>

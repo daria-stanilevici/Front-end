@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<style>
+    body {
+        background: #EFEFEF;
+        font-family: 'Lato', sans-serif;
+    }
+    h1 {
+        position: relative;
+        color: #353535;
+        font-size: 35px;
+        font-family: "Cormorant Garamond", serif;
+    }
+    button {
+        margin: 10px;
+        outline: none;
+        width: 90px;
+        height: 40px;
+        padding: 10px 20px;
+        border: 2px solid #000;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+    }
+    .btn {
+        background: #000;
+        color: #fff;
+        z-index: 1;
+    }
+    .btn:after {
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 100%;
+        top: 0;
+        right: 0;
+        z-index: -1;
+        background: #e0e5ec;
+        transition: all 0.3s ease;
+    }
+    .btn:hover {
+        color: #000;
+    }
+    .btn:hover:after {
+        left: 0;
+        width: 100%;
+    }
+    .btn:active {
+        top: 2px;
+    }
+
+    table {
+        margin: 10px;
+        border-collapse: collapse;
+        border: 2px solid dimgrey;
+        letter-spacing: 1px;
+        font-size: .8rem;
+    }
+    tr, td {
+        border: 1px solid dimgrey;
+        padding: 10px;
+    }
+    h4 {
+        font-weight:normal;
+    }
+</style>
+<body>
+<h1>Coloring zeros</h1>
+<table id="table">
+    <tr>
+        <td>5</td>
+        <td>0</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>0</td>
+        <td>2</td>
+    </tr>
+</table>
+<button class="btn" onclick="color()">Color!</button>
+<h1>Iterator</h1>
+<ol id="list" type="1">
+    <li>3</li>
+    <li>2</li>
+    <li>7</li>
+</ol>
+<button class="btn" onclick="iterator(list)">+ 1</button>
+<h1>Change some text</h1>
+<p id="paragraph" onclick="change(document.getElementById('paragraph').value)">But easy come, and easy go, and it would end.</p>
+<h1>Italics</h1>
+<h4>I'm beggin', beggin' you</h4>
+<h4>So, put your loving hand out, baby</h4>
+<h4>I'm beggin', beggin' you</h4>
+<h4>So, put your loving hand out, darling</h4>
+<h1>Swap paragraph on his id</h1>
+<button onclick="position(document.body)">Swap</button>
+<h1>Add id on paragraph</h1>
+<button onclick="paragraph_id(document.body)">Add id</button>
+<script>
+    // 1. The HTML document contains a table and a button, when clicked, all cells containing the value 0 should be colored.
+    function color() {
+        let table = document.getElementById('table');
+            for(let row of table.rows)
+                for(let col of row.cells)
+                    if (+col.innerText == 0) {
+                        col.style.backgroundColor = "#000";
+                        col.style.color = "#fff";
+                    }
+        }
+    // 2. The HTML document contains a numbered list of numbers. The button is given. Make it so that when clicking on the button, the value of each element of the list is increased by 1.
+    function iterator(list) {
+        for(let e of list.children)
+            e.innerText++;
+    }
+    // 3. Given a paragraph, clicking on which you receive the prompt, which you can use to replace the content of a paragraph to a new text.
+    function change() {
+        let change = document.getElementById('paragraph');
+        let str = prompt('Enter string to replace:', 'Put your loving hand out, baby \'cause I\'m beggin\'.');
+        change.innerText = str;
+    }
+    // 4. Write a script that, when you click on each paragraph of an HTML document, changes the text of the paragraph in italicized text.
+    function italics() {
+        this.style.cssText = `font-style: italic;`;
+    }
+    let elem = document.getElementsByTagName('h4');
+    for (let i = 0; i < elem.length; i++) {
+        elem[i].addEventListener('click', italics);
+    }
+    // 5. The HTML code is given (see under the task). Change the contents of the paragraphs to their sequence number in the code. (Create a button for this).
+    function position(body){
+        for(let i = 0; i < body.children.length; i++)
+            if(document.body.children[i] == '[object HTMLDirectoryElement]' ||
+                document.body.children[i] == '[object HTMLParagraphElement]')
+                document.body.children[i].innerText = i;
+    }
+    // 6. The HTML code is given (see the previous task). Add their sequence number in the code before each paragraph. (Create a button for this).
+    function paragraph_id(body) {
+        for (let i = 0; i < body.children.length; i++)
+            if (document.body.children[i] == '[object HTMLDirectoryElement]' ||
+                document.body.children[i] == '[object HTMLParagraphElement]')
+                document.body.children[i].innerText = i + '. ' + document.body.children[i].innerText;
+    }
+    // 7 The table is given. When you click on any cell, a prompt appears, with which you can change the text of the cell.
+    function prompt_appear() {
+        let str = prompt(`Enter new value`);
+        this.innerText = str;
+    }
+    let element = document.getElementsByTagName('td');
+    for (let i = 0; i < element.length; i++) {
+        element[i].addEventListener('click', prompt_appear);
+    }
+</script>
+</body>
+</html>

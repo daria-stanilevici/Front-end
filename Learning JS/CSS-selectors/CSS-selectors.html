@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 10</title>
+</head>
+<style>
+    input {
+        display: block;
+    }
+</style>
+<body id="body">
+<h1>New input on button click</h1>
+<div id="inputs">
+    <button id="input_btn" onclick="input_add()"> + </button><input>
+</div>
+<h1>Add/Delete the last item in the list</h1>
+<button onclick="add_li()"> + </button>
+<button onclick="rm_li()"> - </button>
+<ol id="list">
+    <li>My waters spread from one end of the earth to the other  </li>
+    <li>And proud whales for some reason listen to my quiet word  </li>
+    <li>I have never learned to speak imperiously and loudly  </li>
+    <li>And the words, even from the biggest waves, come timidly  </li>
+</ol>
+<h1>Add some text in the end of the body</h1>
+<button onclick="last_li()"> + </button>
+<h1>Insert array elements at the end of ul</h1>
+<button onclick="add_new()"> + </button>
+<ul id="ul">
+    <li>And when people called me the biggest ocean in the world</li>
+    <li>I was very surprised, because I'm so quiet</li>
+    <li>And there are probably wider oceans</li>
+    <li>But then God said one phrase, in a lonely voice</li>
+    <li>You know, to become the world's largest ocean</li>
+    <li>You don't need to be loud</li>
+</ul>
+<h1>Click on the list item to increase it by 1</h1>
+<ol id="increase">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ol>
+</body>
+<script>
+    // 1. The input field (input element) is given. There is a "+" button next to it. By clicking on this button, another empty input should appear under our input.
+    function input_add() {
+        document.getElementById('inputs').appendChild(document.createElement('input'));
+    }
+    // 2. The web page contains a numbered list of ol and a button, by clicking on which you will get its last descendant and delete it.
+    function rm_li() {
+        let list = document.getElementById('list');
+        document.getElementById('list').removeChild(list.getElementsByTagName('li')[list.getElementsByTagName('li').length - 1]);
+    }
+    // 3. The web page contains a numbered list of ol and a button, by clicking on which a new li with the text 'item' will be added to the end of the list.
+    function add_li() {
+        for (const item of prompt('Enter some text', 'My strata give life to millions of fish and dolphins').split('  ')) {
+            let new_item = document.createElement('li');
+            new_item.textContent = item;
+            document.getElementById("list").appendChild(new_item);
+        }
+    }
+    // 4. Insert array elements at the end of ul
+    function add_new() {
+        let ul = document.getElementById("ul");
+        let str = prompt("Enter a new text: ");
+        let arr = str.split(' ' || ', ');
+        let new_item;
+        for(let item of arr){
+            new_item = document.createElement('li');
+            new_item.textContent = item;
+            ul.appendChild(new_item);
+        }
+    }
+    // 5. An array is given (array elements can be entered using prompt separated by a space or separated by a comma). Create a div via createElement, then paste each element of this array into a separate p inside this div, then paste this div into the end of the body.
+    function last_li() {
+        let new_div = document.createElement('div');
+        for (const item of prompt('Enter some text').split(' ' || ', ')) {
+            let new_item = document.createElement('p');
+            new_item.textContent = item;
+            new_div.appendChild(new_item);
+        }
+        document.getElementById('body').appendChild(new_div);
+    }
+    // 6. The web page contains a numbered list ol, the elements of which are integers. Make it so that when you click on each item in the list, the number increases by 1.
+    for (const item of document.getElementById('increase').children) {
+        item.addEventListener('click', () => {
+            item.textContent++;
+        });
+    }
+</script>
+</html>

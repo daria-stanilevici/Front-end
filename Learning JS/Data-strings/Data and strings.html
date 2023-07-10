@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Date Time</title>
+</head>
+<style>
+    .button {
+        width: 150px;
+        height: 50px;
+        padding: 10px 25px;
+        margin: 10px;
+        border: 2px solid #000;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: block;
+    }
+    .button:after {
+        position: absolute;
+        content: "";
+        top: 5px;
+        left: 6px;
+        width: 90%;
+        height: 70%;
+        border: 1px solid #000;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+    .button:hover:after {
+        opacity: 1;
+    }
+    body {
+        background: #e0e5ec;
+        font-family: 'Lato', sans-serif;
+    }
+    h1 {
+        position: relative;
+        color: #353535;
+        font-size: 35px;
+        font-family: "Cormorant Garamond", serif;
+    }
+    .seconds {
+        background-color: transparent;
+        text-align: center;
+        font-size: 18px;
+        margin: 10px;
+        display: block;
+        width: 150px;
+        height: 50px;
+        border: none;
+        border-bottom: 1px solid #757575;
+    }
+    .string {
+        background-color: transparent;
+        text-align: center;
+        font-size: 14px;
+        margin: 10px;
+        display: block;
+        width: 800px;
+        word-wrap: break-word;
+        height: 50px;
+        border: none;
+        border-bottom: 1px solid #757575;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    table {
+        border-collapse: collapse;
+        border: 2px solid dimgrey;
+        letter-spacing: 1px;
+        font-size: .8rem;
+    }
+    td {
+          border: 1px solid dimgrey;
+          padding: 10px;
+    }
+    .split {
+        width: 160px;
+        height: 30px;
+        padding: 5px 10px;
+        margin: 5px;
+        border: 2px solid dimgrey;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: block;
+    }
+    .split:after {
+        position: absolute;
+        content: "";
+        top: 3px;
+        left: 3px;
+        width: 95%;
+        height: 70%;
+        border: 1px solid dimgrey;
+        opacity: 0;
+        transition: all 0.5s ease;
+    }
+    .split:hover:after {
+        opacity: 1;
+    }
+
+</style>
+
+<body>
+<h1>Date and time</h1>
+<button class="button" id="first_button">Now</button>
+<button class="button" id="sec_button">Yesterday</button>
+<button class="button" id="third_button">10 Years ago</button>
+<button class="button" id="fourth_button">In a week</button>
+<h1>Number of seconds until the end of the day</h1>
+<label><input class="seconds" id="seconds" readonly/></label>
+<h1>Change the first and the last word in a string</h1>
+<label><input class="string" value="Your string: E Coraline piange, Coraline ha l\'ansia, Coraline vuole il mare ma ha paura dell’acqua. E forse il mare è dentro di lei." readonly/></label>
+<label><input class="string" id="finalstr" readonly/></label>
+<h1>Wrapping words</h1>
+
+<script>
+    // 1. Create a web page containing 4 HTML buttons. When you click on each button, an alert window will appear, displaying the date and time relative to the current date and time. The first button Now is the current date and time, the second button Yesterday is the date and time 24 hours ago, the third button is the date and time 10 years ago, the fourth button is the date and time in a week.
+    let now = new Date();
+    document.getElementById('first_button').onclick = function() {
+        alert(now, "Today:");
+    };
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    document.getElementById('sec_button').onclick = function() {
+        alert(yesterday, "Yesterday:");
+    };
+    let tya  = new Date();
+    tya.setFullYear(now.getFullYear() - 10);
+    document.getElementById('third_button').onclick = function() {
+        alert(tya, "10 years ago:");
+    };
+    let nextWeek = new Date()
+    nextWeek.setDate(new Date().getDate() + 7);
+    document.getElementById('fourth_button').onclick = function() {
+        alert(nextWeek, "In a week:");
+    };
+    // 2. Display the number of seconds left until the end of the day.
+    let d = new Date();
+    let h = d.getHours();
+    let m = d.getMinutes();
+    let s = d.getSeconds();
+    let secondsUntilEndOfDate = (24 * 60 * 60) - (h * 60 * 60) - (m * 60) - s;
+    document.getElementById('seconds').value = secondsUntilEndOfDate;
+    // 3. A string of characters is given. Any sequence of letters and numbers is considered a word of the text. Swap the first and last word in a line.
+    let str = 'E Coraline piange, Coraline ha l\'ansia, Coraline vuole il mare ma ha paura dell’acqua. E forse il mare è dentro di lei';
+    let array = str.split(' ');
+    let first = array[0];
+    let last = array[array.length - 1];
+    array[0] = last;
+    array[array.length - 1] = first;
+    str = array.join(' ');
+    document.getElementById('finalstr').value = 'Final string: ' + str;
+    // 4. A string of characters has been entered. A group of characters separated on one or both sides by one or more spaces and containing no spaces inside, we call a word. "Flip" each word, keeping their order in the line unchanged.
+    function swap(line, i, j) {
+        let sb = line.split("");
+        sb[i] = line[j];
+        sb[j] = line[i];
+        return sb.join("");
+    }
+    function reverseWords(line) {
+        let start = 0;
+        for(let i = 0; i < line.length; i++) {
+            if (line[i] == ' ' || i == line.length - 1 ) {
+                let end;
+                if (i == line.length - 1) end = i ;
+                else end = i - 1 ;
+                while (start < end) {
+                    line = swap(line, start, end);
+                    start++;
+                    end--;
+                }
+                start = i + 1;
+            }
+        }
+        return line;
+    }
+    let line = "E Coraline piange, Coraline ha l\'ansia, Coraline vuole il mare ma ha paura dell’acqua. E forse il mare è dentro di lei";
+    document.write(reverseWords(line));
+    // 5. Write a script that reads the phone number in the format (555) 555-5555. The script should use the split method of the String object to extract the country code (the value in parentheses) and the phone number. Output the extracted data in different text fields, as shown in the figure.
+    const number_split = () => {
+        let input = document.getElementById('your_number').value;
+        let input_array = input.split(" ");
+        document.getElementById('code_input').value = input_array[0];
+        document.getElementById('number_input').value = input_array[1];
+        };
+    // 6. Write a script that reads multiline text and some character and, using the indexOf method of the String object, counts the number of specified characters in the text.
+    const search_item = () => {
+    const item = document.getElementById('search_item').value;
+    const area = document.getElementById('text_area').value;
+        document.getElementById('area_result').value = area.split("").map((i) => !!~i.indexOf(item)).filter((i) => i).length;
+    };
+</script>
+<h1>Mobile Number Editor</h1>
+<table>
+    <tr>
+        <td>Enter a phone number [in the form (555) 555-5555]</td>
+        <td><input id="your_number" value="(123) 456-7890"/></td>
+    </tr>
+    <tr>
+        <td><button value="Split" class="split" onclick="number_split()"/>Split</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Area code:</td>
+        <td><input id="code_input"/></td>
+    </tr>
+    <tr>
+        <td>Number:</td>
+        <td><input id="number_input"/></td>
+    </tr>
+</table>
+<h1>Counting characters</h1>
+<label>Enter some text:</label>
+<textarea id="text_area" name="area" rows="5" cols="33">E Coraline piange, Coraline ha l'ansia, Coraline vuole il mare ma ha paura dell’acqua. E forse il mare è dentro di lei</textarea>
+<label>Enter a character to search for
+    <textarea id="search_item">e</textarea>
+    <button id="search_button" onclick="search_item()">Search</button>
+</label>
+    <label>Results
+        <textarea id="area_result" readonly></textarea>
+    </label>
+</body>
+</html>

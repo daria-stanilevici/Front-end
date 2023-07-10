@@ -1,0 +1,30 @@
+<!-- 5. Create a script that displays a table of squares and cubes of numbers from 0 to 10 -->
+
+<!DOCTYPE html>
+<html lang="ru">
+   <body>
+      <title>Table of degrees</title>
+      <style type="text/css">
+         .column {
+         display: flex;
+         column-gap: 15px;
+         }
+      </style>
+      <script>
+         document.write('<div class="column">Number<br>');
+         for (var i = 0; i <= 10; i++) {
+         document.write(i + '<br>'); 
+         }
+         
+         document.write('<div class="column">Square<br>');
+         for (var i = 0; i <= 10; i++) {
+         document.write(i * i + '<br>'); 
+         }
+         
+         document.write('<div class="column">Cube<br>');
+         for (var i = 0; i <= 10; i++) {
+         document.write(i * i * i + '<br>'); 
+         }
+      </script>
+   </body>
+</html>

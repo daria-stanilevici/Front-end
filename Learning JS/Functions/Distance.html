@@ -1,0 +1,28 @@
+<!-- 3. Write a distanta function that calculates the distance between two points (x1, y1) and (x2, y2). All values must be of real type. You will need the Math.sqrt function to calculate the square root. Use this function in a script that allows the user to enter the coordinates of points in an HTML form and outputs the result in the same form -->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Distance</title>
+   </head>
+   <body>
+      <form>
+         <div>Enter x1<input type="number" id="x1"></div>
+         <div>Enter y1<input type="number" id="y1"></div>
+         <div>Enter x2<input type="number" id="x2"></div>
+         <div>Enter y2<input type="number" id="y2"></div>
+         <button type="button" onclick="Distance()">Calculate</button>
+         <div>Distance<input type="number" id="distance"></div>
+      </form>
+
+      <script type="text/javascript">
+         function Distance() {
+         var xf = x1.value;
+         var yf = y1.value;
+         var xs = x2.value;
+         var ys = y2.value;
+         distance.value = (Math.sqrt(Math.pow((xs - xf), 2) + Math.pow((ys - yf), 2) ));        
+         }
+      </script>
+   </body>
+</html>

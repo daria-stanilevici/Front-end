@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        background-color: #EDEDED;
+    }
+    h1 {
+        letter-spacing: .125rem;
+        text-transform: uppercase;
+    }
+    .countdown {
+        font-family: Candara;
+    }
+    li {
+        margin:0px auto 0px auto;
+        display: inline-block;
+        font-size: 1.5em;
+        list-style-type: none;
+        padding: 1em;
+        text-transform: uppercase;
+    }
+    li span {
+        display: block;
+        font-size: 4.5rem;
+    }
+    #clock {
+        font-size: 70px;
+        font-family: Candara;
+    }
+    .clock {
+        width: 370px;
+        height: 100px;
+        background: #DDBEBE;
+        border-radius: 30px;
+    }
+    .clocky {
+        font-size: 30px;
+    }
+</style>
+<body>
+<h1>Change the first paragraph</h1>
+<button onclick="p_change()">Change!</button>
+<p id="p">I am so happy with them, they make me beautiful</p>
+<p>They sing about living in the world's largest ocean</p>
+<p>And I feel so uncomfortable from such attention</p>
+<h1>Add http</h1>
+<button onclick="add_http()">Press me!</button><br><br>
+<a href="https://www.google.ru/">Google</a><br><br>
+<a href="https://yandex.ru/">Yandex</a><br><br>
+<a href="https://go.mail.ru/">Mail</a><br><br>
+<h1>Ticking timer:</h1>
+<div class="clock" id="clock"></div>
+<h1>Countdown:</h1>
+    <div class="countdown" id="countdown">
+        <ul>
+            <li><span id="days"></span>days</li>
+            <li><span id="hours"></span>Hours</li>
+            <li><span id="minutes"></span>Minutes</li>
+            <li><span id="seconds"></span>Seconds</li>
+        </ul>
+    </div>
+<h1>Time until the next pair:</h1>
+<div class="clocky" id="clocky"><span></span></div>
+</body>
+<script>
+    // 1. The web page contains text divided into paragraphs and a button, when clicked, the first paragraph will become h3, but the text will remain the same.
+    function p_change() {
+    let change = document.getElementById('p');
+    change.outerHTML = '<h3>' + change.innerHTML + '</h3>';
+    }
+    // 2. The HTML page contains links and a button, when clicked, an address will appear next to the link name.
+    function add_http(){
+    let items = document.getElementsByTagName('a');
+    for (let i = 0; i < items.length; i++) {
+        items[i].innerHTML = items[i].innerHTML + ' (' + items[i].getAttribute('href') + ') ';
+    }
+    }
+    // 3. Create a ticking clock. Apply Styles.
+    function clock() {
+        let today = new Date(),
+            hours = today.getHours(),
+            minutes = today.getMinutes(),
+            seconds = today.getSeconds(),
+            meridiem;
+        if (hours >= 12) {
+            meridiem = " PM";
+        }
+        else {
+            meridiem = " AM";
+        }
+        if (hours > 12) {
+            hours = hours - 12;
+        }
+        else if (hours===0) {
+            hours = 12;
+        }
+        if (minutes<10) {
+            minutes = "0" + minutes;
+        }
+        else {
+            minutes = minutes;
+        }
+        if (seconds<10) {
+            seconds = "0" + seconds;
+        }
+        else {
+            seconds = seconds;
+        }
+        document.getElementById("clock").innerHTML = (hours + ":" + minutes + ":" + seconds + meridiem);
+    }
+    setInterval('clock()', 1000);
+    // 4. Create a countdown timer. When clicking on the initial value, a prompt should appear requesting the initial value.
+    (function () {
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+        let today = new Date(),
+            dd = String(today.getDate()).padStart(2, '0'),
+            mm = String(today.getMonth() + 1).padStart(2, '0'),
+            yyyy = today.getFullYear(),
+            nextYear = yyyy + 1,
+            // dayMonth = "12/31/",
+            dayMonth = prompt('Enter the date in the format 00/00/ (The year sets automatically) ', '12/31/')
+            ny = dayMonth + yyyy;
+        today = mm + "/" + dd + "/" + yyyy;
+        if (today > ny) {
+            ny = dayMonth + nextYear;
+        }
+        const countDown = new Date(ny).getTime(),
+            x = setInterval(function() {
+                const now = new Date().getTime(),
+                    distance = countDown - now;
+                document.getElementById("days").innerText = Math.floor(distance / (day)),
+                    document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+                    document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+                    document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+            }, 0)
+    }());
+    // 5. Create a countdown of the number of minutes (seconds) before the call.
+    function next_lesson() {
+        let bell = ['8:00:00', '9:30:00', '11:10:00', '12:40:00'];
+        let clock = document.getElementById('clocky');
+        let now = new Date();
+        now.setHours(now.getHours() + 1);
+        let hour = now.getHours();
+
+        let next = 999;
+        for (let i = 3; i >= 0; i--) {
+            let value = bell[i];
+            let split = value.split(':');
+            let hour1 = split[0];
+            if (hour < hour1) {
+                next = i;
+            }
+        }
+        let split = bell[next].split(':');
+        let h = split[0] - now.getHours();
+        let m = split[1] - now.getMinutes();
+        if (m < 0) {
+            h--;
+            m = 60 + m;
+        }
+        clock.children[0].innerHTML = h + ' hours and ' + m + ' minutes until the next pair';
+    }
+    next_lesson();
+
+</script>
+</html>

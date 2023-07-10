@@ -1,0 +1,16 @@
+<!-- 2. Write a loop that prompts prompt to enter a number greater than 100. If the user entered a different number, ask them to enter it again, and so on. The loop should ask for a number until either the user enters a number greater than 100, or presses the Cancel button (ESC). It is assumed that the user enters only numbers. It is not necessary to provide for the processing of non-numeric strings in this task -->
+
+<!DOCTYPE html>
+<html lang="ru">
+   <body>
+      <title>Number > 100</title>
+      <script>
+         let num;
+
+         do {
+            num = prompt("Enter a number > 100");
+         } while (num <= 100 && num);
+         alert('Good job!');
+      </script>
+   </body>
+</html>

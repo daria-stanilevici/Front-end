@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>
+        Image Gallery
+    </title>
+    <style>
+        .thumbs li {
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            overflow: hidden;
+        }
+        .thumbs li img {
+            max-width: 100%;
+        }
+        button {
+            top: 0;
+        }
+        img:hover{
+            background: rgba(0, 0, 0, .3);
+        }
+        .button.prev, .button.next {
+            padding: 20px;
+            display: inline-block;
+            background: #eee;
+            text-align: center;
+        }
+        .button.prev:hover, .button.next:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <article class="image-gallery">
+        <ul class="thumbs">
+            <div class="gallery">
+            <a class="button prev"><</a>
+            <li><a href="#image1"><img src="images/cow.png"> </a></li>
+            <li><a href="#image2"><img src="images/rabbit.png"></a></li>
+            <li><a href="#image3"><img src="images/sheep.png"></a></li>
+            <li><a href="#image4"><img src="images/pig.png"></a></li>
+            <a class="button next">></a>
+            </div>
+        </ul>
+        <div class="big-image">
+            <img id="default" src="images/cow.png" style="background: white">
+        </div>
+    </article>
+</section>
+<script>
+    let imgs = document.querySelectorAll(".thumbs li a img"),
+        imgList = [], // Image source array
+        nextBtn = document.querySelector('.next'),
+        prevBtn = document.querySelector('.prev'),
+        mainImg = document.querySelector('#default'),
+        imgAttr, curImg = 0;
+
+    console.log(imgs);
+
+    for (img in imgs) {
+        if (img > img.length - 2) {
+            imgList.push(imgs[img].getAttribute('src'));
+            imgs[img].addEventListener('click', function() {
+                imgAttr = this.getAttribute('src');
+                document.querySelector('.big-image img').setAttribute('src', imgAttr);
+            });
+        }
+    };
+
+    prevBtn.addEventListener('click', function() {
+        curImg = mainImg.getAttribute('src');
+        if (imgList.indexOf(curImg) > 0) {
+            imgAttr = imgList[imgList.indexOf(curImg) - 1];
+            document.querySelector('.big-image img').setAttribute('src', imgAttr);
+        }
+    });
+
+    nextBtn.addEventListener('click', function() {
+        curImg = mainImg.getAttribute('src');
+        if (imgList.indexOf(curImg) < imgList.length - 1) {
+            imgAttr = imgList[imgList.indexOf(curImg) + 1];
+            document.querySelector('.big-image img').setAttribute('src', imgAttr);
+        }
+    });
+</script>
+</body>
+
+</html>

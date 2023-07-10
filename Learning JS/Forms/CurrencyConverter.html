@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body {
+        background-color: #222831;
+        color: #EEEEEE;
+        font-family: Candara;
+        font-size: 30px;
+        justify-content: center;
+    }
+    button {
+        background-color: transparent;
+        color: #EEEEEE;
+        border: 2px solid #00ADB5;
+        cursor:pointer;
+    }
+    select {
+        cursor:pointer;
+        color: #EEEEEE;
+        border-color: #00ADB5;
+        background-color: transparent;
+    }
+    option {
+        color: #222831;
+    }
+</style>
+<body>
+<div>
+    <div>
+        <h2>Currency Calculator</h2>
+        <form>
+            <div>
+                <label>Currency</label>
+                <select id="currency-1" required>
+                    <option>EUR</option>
+                    <option>USD</option>
+                    <option>MDL</option>
+                </select>
+            </div>
+            <div>
+                <label>Convert to</label>
+                <select id="currency-2" required>
+                    <option>MDL</option>
+                    <option>USD</option>
+                    <option>EUR</option>
+                </select>
+            </div>
+            <input type="number" id="amount" placeholder="Value"/>
+            <button class="calculate-btn">Submit</button>
+        </form>
+        <div class="result">
+            <p>
+                <span class="given-amount"></span>
+                <span class="base-currency"></span>
+                <span class="final-result"></span>
+                <span class="second-currency"></span>
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    let crrncy = {'EUR': {'MDL': 20.24, 'USD': 1.16}, 'USD': {'MDL': 17.52, 'EUR': 0.87}}
+    let btn = document.querySelector('.calculate-btn');
+    let baseCurrencyInput = document.getElementById('currency-1');
+    let secondCurrencyInput = document.getElementById('currency-2');
+    let amountInput = document.getElementById('amount');
+    let toShowAmount = document.querySelector('.given-amount');
+    let toShowBase = document.querySelector('.base-currency');
+    let toShowSecond = document.querySelector('.second-currency');
+    let toShowResult = document.querySelector('.final-result');
+    function convertCurrency(event) {
+        event.preventDefault();
+        let amount = amountInput.value;
+        let from = baseCurrencyInput.value;
+        let to = secondCurrencyInput.value;
+        let result = 0;
+        try{
+            if (from == to){
+                result = amount;
+            } else {
+                result = amount * crrncy[from][to];
+            }
+        }
+        catch(err) {
+            result = amount * (1 / crrncy[to][from]);
+        }
+        toShowAmount.innerHTML = amount;
+        toShowBase.textContent = from + ' = ';
+        toShowSecond.textContent = to;
+        toShowResult.textContent = result;
+    }
+    btn.addEventListener('click', convertCurrency);
+</script>
+</body>
+</html>

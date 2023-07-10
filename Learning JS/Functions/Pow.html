@@ -1,0 +1,26 @@
+<!-- 4. Write the integerPower(base, exponent) function, which will return base to the exponent degree. For example, integerPower(3, 4) = 3 * 3 * 3 * 3. The degree and bases are integers. Do not use the built-in mathematical functions for calculations. The values are entered into an HTML form containing a button, when clicked, the result is output in the same form -->
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Pow</title>
+   </head>
+   <body>
+      <form>
+         <div>Base<input type="number" id="base"></div>
+         <div>Exponent<input type="number" id="exponent"></div>
+         <button type="button" onclick="integerPower(base.value, exponent.value)">Calculate</button>
+         <div>Result<input id="result" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');"/></div>
+      </form>
+      
+      <script type="text/javascript">
+         function integerPower(base, exponent) {
+            var res = 1;
+            for(var i = 0; i < exponent; i++) {
+               res *= base;
+            }
+            result.value = res;
+         }         
+      </script>
+   </body>
+</html>

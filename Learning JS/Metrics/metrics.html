@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Metrics</title>
+</head>
+<body>
+<button onclick="bottom()" id="bottom">To the bottom!</button>
+<div id="test">Increase my width and height by 2 times!</div>
+<img src="images/flower.png"><br>
+<button id="scroll">scroll 400px</button>
+<br>
+<button onclick="check()" id="check">100px from the top</button>
+<p id="paragraph">You know, to become the world's largest ocean, you don't need to be loud</p>
+<div>
+    <p>Do you want to close this block?</p>
+    <span><button>Close</button></span>
+</div>
+</body>
+<style>
+    body {
+        font-family: Candara;
+        font-size: 30px;
+    }
+    img {
+        margin: 50px;
+        width: 100px;
+    }
+    button {
+        font-size: 25px;
+        margin: 5px;
+        padding: 5px;
+        background-color: transparent;
+        border-color: #AC66CC;
+        border-radius: 10px;
+    }
+    p {
+        margin: 5px;
+    }
+    div {
+        margin: 5px;
+    }
+</style>
+<script>
+    // 1. By clicking on the button, scroll to the bottom of the page.
+    function bottom() {
+        window.scrollTo(0,document.body.scrollHeight);
+    }
+    // 2. By pressing the button, scroll the page 400px from the current position.
+    let btn = document.getElementById('scroll');
+    btn.addEventListener('click', scroll);
+    function scroll() {
+        window.scrollBy(0, 400);
+    }
+    // 3. By clicking on the button, check whether the page is screwed to the very bottom. If so, scroll it to the position 100px from the top edge.
+    function check() {
+        let body = document.documentElement;
+        if (body.scrollHeight - body.scrollTop == body.clientHeight) {
+            window.scrollTo(0, 100);
+        }
+    }
+    // 4. The #test element is given. By clicking on it, increase its width and height by 2 times.
+    let div = document.getElementById('test');
+    div.addEventListener('click', increaseBy);
+    function increaseBy() {
+        let w = this.offsetWidth;
+        let h = this.offsetHeight;
+        this.style.width = w * 2 + 'px';
+        this.style.height = h * 2 + 'px';
+    }
+    // 5. Pictures are given. On the first click on any image, increase it by 2 times. On the second click - reduce back
+    let elem = document.getElementsByTagName('img');
+    for (let i = 0; i < elem.length; i++){
+        elem[i].addEventListener('click', increase);
+    }
+    function increase() {
+        this.style.transform = "scale(2)";
+        this.removeEventListener('click', increase);
+        this.addEventListener('click', decrease);
+    }
+    function decrease() {
+        this.style.transform = "scale(1)";
+        this.removeEventListener('click', decrease);
+        this.addEventListener('click', increase);
+    }
+    // 6. A paragraph is given. Given an array of colors ['red', 'green', 'blue']. Make it so that every second the paragraph changes its color to a certain value of their array: first 'red', then 'green' and so on. As soon as the colors in the array run out, everything will start over. The number of colors in the array can be any.
+    let p = document.getElementById('paragraph');
+    window.setInterval(color, 1000);
+    let arr = ['#AC66CC', '#93ABD3', '#F3C583', '#E99497'];
+    let i = 0;
+    function color() {
+        p.style.color = arr[i];
+        i++;
+        if (i >= arr.length) {
+            i = 0;
+        }
+    }
+    // 7. A block with the 'close block' button is given. By clicking on this button, the block should disappear. The button is placed inside the block and should disappear with it. There can be any number of blocks, each of them closes its own button.
+    let span = document.getElementsByTagName('span');
+    for (let i = 0; i < span.length; i++) {
+        span[i].addEventListener('click', disappear)
+    }
+    function disappear() {
+        this.parentNode.style.display = 'none';
+    }
+</script>
+</html>

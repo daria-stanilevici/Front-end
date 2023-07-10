@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voting system</title>
+</head>
+<style>
+  .container{
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .team{
+    border: 1px solid lightgray;
+    text-align: center;
+    width: 200px;
+  }
+  img{
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+
+  }
+  button{
+    width: 80%;
+    padding: 5px 10px;
+    background-color:green;
+    border: none;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .image{
+    height: 200px;
+  }
+  p{
+    background-color: whitesmoke;
+    border-top: 1px solid lightgray;
+    margin:0;
+    padding: 10px;
+  }
+</style>
+<body>
+<div class="container">
+  <div class="team barcelona">
+    <div class='image'>
+      <img src="https://cdn.freebiesupply.com/logos/thumbs/2x/fc-barcelona-logo.png" alt="">
+    </div>
+    <h3>Barcelona</h3>
+    <button>Vote</button>
+    <p>Score:<span class="para"> </span></p>
+  </div>
+  <div class="team juventus">
+    <div class='image'>
+      <img src="https://purepng.com/public/uploads/large/purepng.com-juventus-logojuventuslogojuventus-turin-logonew-21529676316hzqzr.png" alt="">
+    </div>
+    <h3>Juventus</h3>
+    <button>Vote</button>
+    <p>Score:<span class="para"> </span></p>
+  </div>
+  <div class="team manchester">
+    <div class='image'>
+      <img src="https://i.pinimg.com/originals/5f/7d/b6/5f7db63e2c0fc694aef02f1c64a31aab.jpg" alt="">
+    </div>
+    <h3>Manchester</h3>
+    <button>Vote</button>
+    <p>Score:<span class="para"> </span></p>
+  </div>
+</div>
+</body>
+<script>
+  let button=document.querySelectorAll("button")
+  let p = document.querySelectorAll(".para")
+  console.log(p)
+  let score = [0,0,0]
+  button.forEach(function (element, index){
+    element.addEventListener("click", function(){
+      score[index]++
+      p[index].innerHTML=score[index]
+    });
+  });
+</script>
+</html>

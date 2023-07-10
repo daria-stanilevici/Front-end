@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animals and their description</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  body {
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  body .images {
+    height: max-content;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 256px 256px;
+    grid-template-columns: 256px 256px;
+    -ms-grid-rows: 256px 256px;
+    grid-template-rows: 256px 256px;
+  }
+  body .images .image {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  body .images .image .text {
+    opacity: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  body .images .image .text span {
+    font-size: 2rem;
+    color: black;
+    font-family: Candara, sans-serif;
+    font-weight: bold;
+    margin: 10px;
+  }
+  body .images .image .text button {
+    font-family: Candara, sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: black;
+    background: transparent;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  body .images .image .image-block {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  body .images .image .image-block img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    transition: 500ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  body .images .image:hover > .image-block img {
+    -webkit-filter: opacity(0.5);
+    filter: opacity(0.5);
+  }
+  body .images .image:hover > .text {
+    opacity: 1;
+  }
+</style>
+<body>
+<div class="images">
+  <div class="image">
+    <div class="text">
+      <span>Cow</span>
+      <button onclick="window.open('https://en.wikipedia.org/wiki/Cattle');">More</button>
+    </div>
+    <div class="image-block">
+      <img src="images/cow.png"/>
+    </div>
+  </div>
+  <div class="image">
+    <div class="text">
+      <span>Rabbit</span>
+      <button onclick="window.open('https://en.wikipedia.org/wiki/Rabbit');">More</button>
+    </div>
+    <div class="image-block">
+      <img src="images/rabbit.png"/>
+    </div>
+  </div>
+  <div class="image">
+    <div class="text">
+      <span>Pig</span>
+      <button onclick="window.open('https://en.wikipedia.org/wiki/Pig');">More</button>
+    </div>
+    <div class="image-block">
+      <img src="images/pig.png"/>
+    </div>
+  </div>
+  <div class="image">
+    <div class="text">
+      <span>Sheep</span>
+      <button onclick="window.open('https://en.wikipedia.org/wiki/Sheep');">More</button>
+    </div>
+    <div class="image-block">
+      <img src="images/sheep.png"/>
+    </div>
+  </div>
+</div>
+<script>
+</script>
+</body>
+</html>

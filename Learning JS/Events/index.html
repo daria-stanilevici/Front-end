@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+</head>
+<style>
+img {
+    width: 150px;
+}
+table {
+    border: 3px solid #6D9886;
+    border-collapse: collapse;
+    text-align: center;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #6D9886;
+}
+input {
+    width: 71px;
+}
+</style>
+<body>
+<h1>Square of a number</h1>
+<label for="number">Enter a number</label>
+<input id="number" type="text">
+<input value="Submit" onclick="square()" type="button">
+<h1>Change values</h1>
+<label for="first_input">Enter the first value</label>
+<input id="first_input" type="text"/>
+<label for="second_input">Enter the second value</label>
+<input id="second_input" type="text"/>
+<button onclick="swap()">Swap</button>
+<h1>Click count</h1>
+<button id="count">0</button>
+<h1>Swap images</h1>
+<div id="images" class="images">
+    <img onmouseover = "mouseOn()"onmouseout="mouseOut()" id="wave" src="images/wave.png"/>
+    <img onmouseover = "mouseOut()"onmouseout="mouseOn()" id="whale" src="images/whale.png"/>
+</div>
+<h1>Select input number</h1>
+<div>
+<label for="list">With all this frailty...</label>
+    <select id="list">
+        <option>Choose a variant</option>
+        <option>i've already been sick</option>
+        <option>you haven't been infected yet</option>
+    </select>
+    <label for="selected_number">Enter the number</label>
+        <input id="selected_number" type="text"/>
+    <button onclick="select_index()">Select</button>
+</div>
+<h1>Users</h1>
+<div>
+    <table id="table">
+        <tr>
+            <td>Charles</td>
+            <td>Peters</td>
+        </tr>
+        <tr>
+            <td>Elizabeth</td>
+            <td>Gibson</td>
+        </tr>
+        <tr>
+            <td>Michael</td>
+            <td>Jackson</td>
+        </tr>
+    </table>
+    <div>
+        <input id="first_name" type="text"/>
+        <input id="last_name" type="text"/>
+    </div>
+    <button onclick="addNewUser()">Add new user</button>
+</div>
+<h1>Countries</h1>
+<div class="task">
+    <select id="countries">
+        <option>Choose a variant</option>
+        <option>Italy</option>
+        <option>Great britain</option>
+        <option>Belgium</option>
+    </select>
+    <select id="cities"></select>
+</div>
+</body>
+<script>
+    // 1. Create an input field in the HTML document to enter a certain number. Create a button, when clicked, the square of the entered number will be displayed using alert. Provide a case when the user enters a non-numeric value.
+    let square = () => {
+        let number = document.getElementById('number');
+        if (isNaN(number.value)) {
+            alert('Error! Its not a number...');
+            return;
+        } else {
+            alert(number.value * number.value);
+        }
+    };
+    // 2. Create two input fields in the HTML document. Create a button, when you click on which the input fields will swap values.
+    let swap = () => {
+        let firstInput = document.getElementById('first_input');
+        let secondInput = document.getElementById('second_input');
+        [firstInput.value, secondInput.value] = [secondInput.value, firstInput.value];
+    };
+    // 3. Create a button in the HTML document that displays the number of clicks on it.
+    let counterButton = document.getElementById('count');
+    counterButton.addEventListener('click', (element) => {
+        console.log(element.target.textContent);
+        let num = parseInt(element.target.textContent);
+        element.target.textContent = num + 1;
+    });
+    // 4. Example of a simple animation: use 2 images that will be swapped using the ONMOUSEOVER and ONMOUSEOUT events.
+    document.getElementById('wave').addEventListener('mouseover', mouseOn);
+    document.getElementById('whale').addEventListener('mouseout', mouseOut);
+    function mouseOn() {
+        document.getElementById('wave').src = 'images/whale.png';
+        document.getElementById('whale').src = 'images/wave.png';
+    }
+    function mouseOut() {
+        document.getElementById('wave').src = 'images/wave.png';
+        document.getElementById('whale').src = 'images/whale.png';
+    }
+    // 5. The HTML document contains a drop-down list, an input field and a button. Make it so that you can enter a number in the input field, click on the button and the item with this number becomes selected in the drop-down list.
+    function select_index () {
+        let select = document.getElementById('list');
+        let number = document.getElementById('selected_number');
+        select.selectedIndex = number.value - 1;
+    }
+    // 6. The HTML document contains a table of users with two columns: first and last name. Under the table, make a form with which you can add a new user to the table. Make sure that when you click on any cell, a prompt appears, with which you can change the text of the cell. Solve the problem using delegation (that is, the event should be hung on the table)ю
+    let table = document.getElementById('table');
+    table.addEventListener('click', (el) => {
+        if (el.target.nodeName === 'TD') {
+            let newValue = prompt('Enter new value:');
+            el.target.textContent = newValue;
+        }
+    });
+    let addNewUser = () => {
+        let table = document.getElementById('table');
+        let firstName = document.getElementById('first_name').value;
+        let lastName = document.getElementById('last_name').value;
+        let add_row = document.createElement('tr');
+        let fn = document.createElement('td');
+        let ln = document.createElement('td');
+        fn.textContent = firstName;
+        ln.textContent = lastName;
+        add_row.appendChild(fn);
+        add_row.appendChild(ln);
+        table.appendChild(add_row);
+    };
+    // 7. The HTML document contains a drop-down list of countries. Make sure that when you select a country, a drop-down list with a list of cities from this country also appears next to it.
+    let countries = document.getElementById('countries');
+    countries.addEventListener('change', (el) => {
+        let cities = document.getElementById('cities');
+        let options = document.querySelectorAll('#cities option');
+        options.forEach((e) => e.remove());
+        let first_option = document.createElement('option');
+        let second_option = document.createElement('option');
+        let third_option = document.createElement('option');
+        if (el.target.value === 'Italy') {
+            first_option.textContent = 'Bari';
+            second_option.textContent = 'Palermo';
+            third_option.textContent = 'Florence';
+        } else if (el.target.value === 'Great britain') {
+            first_option.textContent = 'Belfast';
+            second_option.textContent = 'Nottingham';
+            third_option.textContent = 'Liverpool';
+        } else if (el.target.value === "Belgium") {
+            first_option.textContent = 'Brussels';
+            second_option.textContent = 'Naples';
+            third_option.textContent = 'Ghent';
+        }
+        cities.appendChild(first_option);
+        cities.appendChild(second_option);
+        cities.appendChild(third_option);
+    });
+</script>
+</html>

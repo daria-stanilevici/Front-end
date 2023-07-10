@@ -1,0 +1,29 @@
+<!-- 4. During the day, the ladybug ascends the pole by 5 m, and during the night it descends by 3 m. It starts climbing in the morning. The height of the column is 15 m.
+   a)In how many days will the ladybug reach the top of the pillar?
+   b) In the conditions of the previous task, the ladybug starts moving in the morning, from a height of 6 m.
+   c) In the conditions of the previous task, the ladybug starts moving immediately after nightfall -->
+
+<!DOCTYPE html>
+<html lang="ru">
+   <head>
+      <title>Ladybug</title>
+   </head>
+   <body>
+      <script>
+         var day = 0;
+         var daytime = 5; // up
+         var nighttime = 3; // down
+         var length = 15;
+         var success = 0; // how much did the ladybug climb in one day
+         
+         while(success < 15) {         	
+         	day += 1;
+         	success += daytime; // 5
+         	if (success < 15) success -= nighttime; // 5 - 3 = 2
+         	document.write('On the ' + day + ' day ladybug climbed ' + success + ' meters<br>')	
+         }
+         
+         if(success = 15) document.write('<br>Ladybug reached the top in ' + day + ' days!<br>');
+      </script>
+   </body>
+</html>

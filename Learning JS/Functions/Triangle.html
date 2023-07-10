@@ -1,0 +1,124 @@
+<!-- 2. Create an html form containing 3 input fields for entering the 3 sides of the triangle, the "Calculate" button and input fields for displaying the results. Create a file *.js containing functions that calculate the perimeter, area, and appearance of a triangle on its sides. Using CSS styles, apply the design to the page -->
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Triangle</title>
+   </head>
+   <body>
+      <style type="text/css">
+         h1 {
+         position: relative;
+         color: #353535;
+         font-size: 50px;
+         font-family: "Cormorant Garamond", serif;
+         }
+         body {
+         background: #FBF4E9;
+         }
+         button {
+         margin: 20px;
+         outline: none;
+         }
+         div {
+         padding: 5px;
+         }
+         .custom-btn {
+         width: 130px;
+         height: 40px;
+         padding: 10px 25px;
+         border: 2px solid #000;
+         font-family: 'Lato', sans-serif;
+         font-weight: 500;
+         background: transparent;
+         cursor: pointer;
+         transition: all 0.3s ease;
+         position: relative;
+         display: inline-block;
+         }
+         .btn-5 {
+         background: #4B3869;
+         color: #A9E4D7;
+         line-height: 42px;
+         padding: 0;
+         border: none;
+         }
+         .btn-5:hover {
+         background: transparent;
+         color: #664E88;
+         box-shadow:
+         -7px -7px 20px 0px #fff9,
+         -4px -4px 5px 0px #fff9,
+         7px 7px 20px 0px #0002,
+         4px 4px 5px 0px #0001;
+         }
+         .btn-5:before,
+         .btn-5:after{
+         content:'';
+         position:absolute;
+         top:0;
+         right:0;
+         height:2px;
+         width:0;
+         background: #664E88;
+         transition:400ms ease all;
+         }
+         .btn-5:after{
+         right:inherit;
+         top:inherit;
+         left:0;
+         bottom:0;
+         }
+         .btn-5:hover:before,
+         .btn-5:hover:after{
+         width:100%;
+         transition:800ms ease all;
+         }
+         input {
+         padding: 10px;
+         background: transparent;
+         border: solid;
+         border-color: #316B83;
+         }
+         input::-webkit-outer-spin-button,
+         input::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+         margin: 0;
+         }
+      </style>
+      <h1>Triangle</h1>
+      <form>
+         <div><input type="number" id="x1" placeholder="Enter the length of x1:"></div>
+         <div><input type="number" id="x2" placeholder="Enter the length of x2:"></div>
+         <div><input type="number" id="x3" placeholder="Enter the length of x3:"></div>
+         <div><input readonly="text" type="number" id="perimeter">
+            <button class="custom-btn btn-5" type="button" onclick="Perimeter()"><span>Perimeter</span></button>
+         </div>
+         <div><input readonly="text" type="number" id="square">
+            <button class="custom-btn btn-5" type="button" onclick="Square()"><span>Square</span></button>
+         </div>
+         <div><input readonly="text" type="text" id="type">
+            <button class="custom-btn btn-5" type="button" onclick="Type()"><span>Type</span></button>
+         </div>
+      </form>
+      <script type="text/javascript">
+         function Perimeter() {
+         perimeter.value = parseInt(x1.value) + parseInt(x2.value) + parseInt(x3.value);
+         }
+         
+         function Square() {
+         var p = (parseInt(x1.value) + parseInt(x2.value) + parseInt(x3.value));
+         
+         square.value = Math.sqrt((p-parseInt(x1.value)) * (p-parseInt(x2.value)) * (p-parseInt(x3.value)));
+         }
+         
+         function Type() {
+         var a = parseInt(x1.value);
+         var b = parseInt(x2.value);
+         var c = parseInt(x3.value);
+         if(a == b && b == c) type.value = 'An equilateral triangle'
+         else if (a == b || a == c || b == c) type.value = 'Isosceles triangle'
+         else type.value = 'An arbitrary triangle';
+         }
+      </script>
+   </body>
+</html>
