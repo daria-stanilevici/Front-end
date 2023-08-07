@@ -1,0 +1,36 @@
+﻿<Window x:Class="Practice.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Practice" xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Register" Height="750" Width="500" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="None">
+    <Grid Background="#FFF2F2EF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Registration" Foreground="#FF4B5040" FontFamily="Ubuntu Mono" FontSize="80" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        <TextBox x:Name="Name" Grid.Row="1" Background="#FF4B5040" Height="65" Width="340" Opacity="0.5" materialdesign:HintAssist.Hint="Name" Foreground="White" FontSize="30" VerticalContentAlignment="Center" FontFamily="Ubuntu Mono"/>
+        <TextBox x:Name="Surname" Grid.Row="2" Background="#FF4B5040" Height="65" Width="340" Opacity="0.5" materialdesign:HintAssist.Hint="Surname" Foreground="White" FontSize="30" VerticalContentAlignment="Center" FontFamily="Ubuntu Mono"/>
+        <TextBox x:Name="Username" Grid.Row="3" Background="#FF4B5040" Height="65" Width="340" Opacity="0.5" materialdesign:HintAssist.Hint="Login" Foreground="White" FontSize="30" VerticalContentAlignment="Center" FontFamily="Ubuntu Mono"/>
+        <PasswordBox x:Name="Password" Grid.Row="4" Background="#FF4B5040" Height="65" Width="340" Opacity="0.5" materialdesign:HintAssist.Hint="Password" Foreground="White" FontSize="30" VerticalContentAlignment="Center" FontFamily="Ubuntu Mono"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="21,52,29,55" Width="450" Height="80">
+            <Button Content="Log in!" FontSize="30" Grid.Row="3" Background="#FF4B5040" Height="60" Width="200" Foreground="White" Click="Button_Click" Margin="130, 0, 0, 0"/>
+            <Button x:Name="Reset" Background="{x:Null}" BorderBrush="{x:Null}" Click="Reset_Click" Width="66" Height="50">
+                <materialdesign:PackIcon Kind="Trash" Foreground="#FF4B5040" Height="40" Width="40"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="0">
+            <Button x:Name="Back" Background="{x:Null}" BorderBrush="{x:Null}" Click="Back_Click">
+                <materialdesign:PackIcon Kind="PageLast" Foreground="Black"/>
+            </Button>
+        </StackPanel>
+        <Button Background="Transparent" Grid.Row="5" VerticalAlignment="Bottom" Margin="0,0,0,40" BorderBrush="{x:Null}"/>
+    </Grid>
+</Window>
